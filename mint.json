@@ -1,6 +1,6 @@
 {
   "$schema": "https://mintlify.com/schema.json",
-  "name": "Documentação Warez",
+  "name": "Documentação",
   "api": {
     "auth": {
       "method": "key",
