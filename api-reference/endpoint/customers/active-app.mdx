@@ -1,14 +1,38 @@
 ---
-title: "Ativar Cliente"
-sidebarTitle: "Ativar Cliente"
-api: "PATCH https://mcapi.knewcms.com:2087/lines/active/{id}"
+title: "Ativar App"
+sidebarTitle: "Ativar App"
+apis:
+- method: 'POST'
+url: https://mcapi.knewcms.com:2087/lines/active/app/xstream"
+description :'Estes endpoints permitem ativar um aplicativo de reprodução (XStream ou BrasilIPTV) para um usuário final.'
+- method: 'POST'
+url: https://mcapi.knewcms.com:2087/lines/active/app"
 authMethod: "authorization"
-description: "Este endpoint permite ativar um cliente de teste, tornando-o um usuário oficial na plataforma ."
+description: "Estes endpoints permitem ativar um aplicativo de reprodução (XStream ou BrasilIPTV) para um usuário final."
 ---
 
 ## Como utilizar este endpoint?
 
-Esse endpoint converte um cliente de teste em um cliente ativo, definindo o período de ativação com base nos créditos utilizados.
+A ativação de aplicativo é feita por requisições **POST**.  
+Escolha o caminho de acordo com o tipo de app que deseja ativar.
+
+<ParamField
+    path="/lines/active/app/xstream"
+    type="string"
+    placeholder="POST /lines/active/app/xstream"
+    required
+>
+    Endpoint para ativar apps do tipo **XStream** (ex.: WTV Player / Wapp).
+</ParamField>
+
+<ParamField
+    path="/lines/active/app"
+    type="string"
+    placeholder="POST /lines/active/app"
+    required
+>
+    Endpoint genérico para ativar apps como **BrasilIPTV**.
+</ParamField>
 
 ### Headers obrigatórios
 
@@ -18,143 +42,74 @@ Esse endpoint converte um cliente de teste em um cliente ativo, definindo o per�
     placeholder="Bearer {token}"
     required
 >
-    O token de autenticação no formato Bearer é obrigatório para acessar este
-    endpoint.
+    Token de autenticação no formato **Bearer**.
 </ParamField>
 
-### Parâmetros da URL
-
-<ParamField path="id" type="string" placeholder="505" required>
-    ID do cliente a ser ativado. Esse parâmetro deve ser informado diretamente na
-    URL.
+<ParamField
+    header="Content-Type"
+    type="string"
+    placeholder="application/json"
+    required
+>
+    Deve ser sempre **application/json**.
 </ParamField>
 
-### Parâmetros do corpo da requisição (Payload)
+### Parâmetros do corpo (payload)
 
-<ParamField body="username" type="string" placeholder="123456" required>
-    Nome de usuário do cliente a ser ativado.
-</ParamField>
+- **nameApp**: string — nome do aplicativo de reprodução
+- **namePlaylist**: string — nome da playlist ou pacote
+- **mac**: string — endereço MAC do dispositivo (com ou sem “:”)
+- **id_user**: number — ID do usuário final
 
-<ParamField body="password" type="string" placeholder="123456" required>
-    Senha do cliente.
-</ParamField>
+### Exemplo de Requisição — XStream
 
-<ParamField body="credits" type="number" placeholder="1" required>
-    Quantidade de créditos para ativação, onde cada crédito corresponde a um
-    período específico: - **0.5 Crédito** → 15 dias - **1 Crédito** → 1 mês - **2
-    Créditos** → 2 meses - **3 Créditos** → 3 meses - **5 Créditos** → 180 dias -
-    **10 Créditos** → 360 dias
-</ParamField>
+````http
+POST https://mcapi.knewcms.com:2087/lines/active/app/xstream
+Authorization: Bearer seu_token_aqui
+Content-Type: application/json
 
-<ParamField body="whatsapp" type="string" placeholder="(12) 3 1231-2312">
-    Número de WhatsApp do cliente. Campo opcional.
-</ParamField>
-
-<ParamField body="country" type="string" placeholder="Brasil" required>
-    País de origem do cliente.
-</ParamField>
-
-<ParamField body="notes" type="string" placeholder="Observações">
-    Observações adicionais sobre o cliente. Campo opcional.
-</ParamField>
-
-### Exemplo de Requisição
-
-```json
-PATCH https://mcapi.knewcms.com:2087/lines/active/505
-Headers:
 {
-  "Authorization": "Bearer seu_token_aqui",
-  "Content-Type": "application/json"
+  "nameApp": "WTV Player/Wapp",
+  "namePlaylist": "teste 1",
+  "mac": "234235333",
+  "id_user": 102330893
 }
-Payload:
-{
-  "credits": 1,
-  "whatsapp": "(12) 3 1231-2312",
-  "country": "Brasil",
-  "notes": "Ativação oficial"
-}
-```
 
 ### Resposta
 
-<ResponseField name="status" type="number">
-    Indica o código HTTP da resposta. Esperado: 201 (Created).
-</ResponseField>
+```json
+  status="success"
+  type="object"
 
-<ResponseField name="response" type="object">
-    Conteúdo da resposta.
+{ "success": true }
 
-    <Expandable title="Mostrar objeto">
-        <ResponseField name="id" type="number">
-            Identificador único do cliente.
-        </ResponseField>
+```json
+{"message":"Dispositivo não encontrado","error":"Not Found","statusCode":404}
+````
 
-        <ResponseField name="username" type="string">
-            Nome de usuário do cliente.
-        </ResponseField>
+## Apps disponíveis para ativação
 
-        <ResponseField name="password" type="string">
-            Senha do cliente.
-        </ResponseField>
+### Via `/lines/active/app`
 
-        <ResponseField name="owner" type="number">
-            ID do proprietário responsável pelo cliente.
-        </ResponseField>
+```json
+[
+  "BrasilIPTV",
+  "EasyPlayer",
+  "IPTVPlus",
+  "IPTVNextPlayer",
+  "IPTVPlayerio",
+  "IPTVProPlayer",
+  "IPTVStarPlayer",
+  "IPlayer",
+  "OttPlayer",
+  "TVVision",
+  "TiviPlayerIPTV",
+  "IPTV4K"
+]
+```
 
-        <ResponseField name="expDate" type="string">
-            Data de expiração do período ativo do cliente.
-        </ResponseField>
+### Via `/active/app/xstream`
 
-        <ResponseField name="status" type="number">
-            Status da conta (1 para ativo).
-        </ResponseField>
-
-        <ResponseField name="isTrial" type="number">
-            Indica se o cliente é de teste (0 para cliente ativo).
-        </ResponseField>
-
-        <ResponseField name="whatsapp" type="string">
-            Número de WhatsApp associado ao cliente.
-        </ResponseField>
-
-        <ResponseField name="country" type="string">
-            País de origem do cliente.
-        </ResponseField>
-
-        <ResponseField name="createdAt" type="string">
-            Data de criação do cliente.
-        </ResponseField>
-
-        <ResponseField name="updatedAt" type="string">
-            Data da última atualização do cliente.
-        </ResponseField>
-    </Expandable>
-</ResponseField>
-
-### Exemplo de Resposta
-
-<ResponseExample>
-    ```json
-    {
-        "id": 505,
-        "username": "123456",
-        "password": "123456",
-        "owner": 80,
-        "expDate": "2025-02-15T14:27:08.832Z",
-        "notes": "Ativação oficial",
-        "status": 1,
-        "isTrial": 0,
-        "whatsapp": "(12) 3 1231-2312",
-        "telegram": null,
-        "trash": 0,
-        "country": "Brasil",
-        "updated": 0,
-        "migrationUrl": null,
-        "lastTrust": null,
-        "email": null,
-        "createdAt": "2025-01-16T13:42:30.047Z",
-        "updatedAt": "2025-01-16T13:42:30.047Z"
-    }
-    ```
-</ResponseExample>
+```json
+["WTV Player/Wapp", "XCloud", "Kplay"]
+```
