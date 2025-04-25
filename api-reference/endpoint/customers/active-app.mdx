@@ -1,115 +1,91 @@
 ---
-title: "Ativar App"
-sidebarTitle: "Ativar App"
-apis:
-- method: 'POST'
-url: https://mcapi.knewcms.com:2087/lines/active/app/xstream"
-description :'Estes endpoints permitem ativar um aplicativo de reprodução (XStream ou BrasilIPTV) para um usuário final.'
-- method: 'POST'
-url: https://mcapi.knewcms.com:2087/lines/active/app"
+title: "Ativar app"
+sidebarTitle: "Ativar app"
+api: "POST https://mcapi.knewcms.com:2087/lines/active/app"
 authMethod: "authorization"
-description: "Estes endpoints permitem ativar um aplicativo de reprodução (XStream ou BrasilIPTV) para um usuário final."
+description: "Este endpoint permite ativar aplicativos."
 ---
 
 ## Como utilizar este endpoint?
 
-A ativação de aplicativo é feita por requisições **POST**.  
-Escolha o caminho de acordo com o tipo de app que deseja ativar.
-
-<ParamField
-    path="/lines/active/app/xstream"
-    type="string"
-    placeholder="POST /lines/active/app/xstream"
-    required
->
-    Endpoint para ativar apps do tipo **XStream** (ex.: WTV Player / Wapp).
-</ParamField>
-
-<ParamField
-    path="/lines/active/app"
-    type="string"
-    placeholder="POST /lines/active/app"
-    required
->
-    Endpoint genérico para ativar apps como **BrasilIPTV**.
-</ParamField>
+Esse endpoint ativa **vários aplicativos** na plataforma.
 
 ### Headers obrigatórios
 
 <ParamField
-    header="Authorization"
-    type="string"
-    placeholder="Bearer {token}"
-    required
+  header="Authorization"
+  type="string"
+  placeholder="Bearer {token}"
+  required
 >
-    Token de autenticação no formato **Bearer**.
+  O token de autenticação no formato Bearer é obrigatório para acessar este
+  endpoint.
 </ParamField>
 
-<ParamField
-    header="Content-Type"
-    type="string"
-    placeholder="application/json"
-    required
->
-    Deve ser sempre **application/json**.
+### Parâmetros do corpo da requisição (Payload)
+
+<ParamField body="notes" type="string" placeholder="Observações">
+  Observações adicionais sobre o cliente. Campo opcional.
 </ParamField>
 
-### Parâmetros do corpo (payload)
+### Exemplo de Requisição
 
-- **nameApp**: string — nome do aplicativo de reprodução
-- **namePlaylist**: string — nome da playlist ou pacote
-- **mac**: string — endereço MAC do dispositivo (com ou sem “:”)
-- **id_user**: number — ID do usuário final
-
-### Exemplo de Requisição — XStream
-
-````http
-POST https://mcapi.knewcms.com:2087/lines/active/app/xstream
-Authorization: Bearer seu_token_aqui
-Content-Type: application/json
-
+```json
+POST https://mcapi.knewcms.com:2087/lines/test
+Headers:
 {
-  "nameApp": "WTV Player/Wapp",
-  "namePlaylist": "teste 1",
-  "mac": "234235333",
-  "id_user": 102330893
+  "Authorization": "Bearer seu_token_aqui",
+  "Content-Type": "application/json"
 }
+Payload:
+{
+    "isTrial": 0,
+    "username": "xxxxxxxx",
+    "password": "xxxxxxxx",
+    "whatsapp": "xxxxx",
+    "telegram": "xxxx",
+    "country": "Brasil",
+    "notes": "xxxx",
+    "credits": 1,
+    "email": "xxxx"
+}
+```
 
 ### Resposta
 
+<ResponseField name="status" type="number">
+  Indica o código HTTP da resposta. Esperado: 201 (activated).
+</ResponseField>
+
+<ResponseField name="code" type="string">
+  O código de status da resposta.
+</ResponseField>
+
+<ResponseField name="response" type="object">
+  Conteúdo da resposta.
+</ResponseField>
+
+### Exemplo de Resposta - Sucesso
+
+<ResponseExample>
 ```json
-  status="success"
-  type="object"
+{
+  "success": true
+}
+````
+<ResponseExample/>
+### Exemplo de Resposta - Error
 
-{ "success": true }
-
+<ResponseExample>
 ```json
 {"message":"Dispositivo não encontrado","error":"Not Found","statusCode":404}
 ````
+<ResponseExample/>
 
-## Apps disponíveis para ativação
+### Aplicativos disponíveis
 
-### Via `/lines/active/app`
-
-```json
-[
-  "BrasilIPTV",
-  "EasyPlayer",
-  "IPTVPlus",
-  "IPTVNextPlayer",
-  "IPTVPlayerio",
-  "IPTVProPlayer",
-  "IPTVStarPlayer",
-  "IPlayer",
-  "OttPlayer",
-  "TVVision",
-  "TiviPlayerIPTV",
-  "IPTV4K"
-]
-```
-
-### Via `/active/app/xstream`
-
-```json
-["WTV Player/Wapp", "XCloud", "Kplay"]
-```
+<ResponseExample>
+  ```json [ "BrasilIPTV", "EasyPlayer", "IPTVPlus", "IPTVNextPlayer",
+  "IPTVPlayerio", "IPTVProPlayer", "IPTVStarPlayer", "IPlayer", "OttPlayer",
+  "TVVision", "TiviPlayerIPTV", "IPTV4K" ]```
+</ResponseExample>
