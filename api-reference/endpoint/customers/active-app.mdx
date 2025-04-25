@@ -28,29 +28,6 @@ Esse endpoint ativa **vários aplicativos** na plataforma.
   Observações adicionais sobre o cliente. Campo opcional.
 </ParamField>
 
-### Exemplo de Requisição
-
-```json
-POST https://mcapi.knewcms.com:2087/lines/test
-Headers:
-{
-  "Authorization": "Bearer seu_token_aqui",
-  "Content-Type": "application/json"
-}
-Payload:
-{
-    "isTrial": 0,
-    "username": "xxxxxxxx",
-    "password": "xxxxxxxx",
-    "whatsapp": "xxxxx",
-    "telegram": "xxxx",
-    "country": "Brasil",
-    "notes": "xxxx",
-    "credits": 1,
-    "email": "xxxx"
-}
-```
-
 ### Resposta
 
 <ResponseField name="status" type="number">
@@ -81,11 +58,3 @@ Payload:
 {"message":"Dispositivo não encontrado","error":"Not Found","statusCode":404}
 ````
 <ResponseExample/>
-
-### Aplicativos disponíveis
-
-<ResponseExample>
-  ```json [ "BrasilIPTV", "EasyPlayer", "IPTVPlus", "IPTVNextPlayer",
-  "IPTVPlayerio", "IPTVProPlayer", "IPTVStarPlayer", "IPlayer", "OttPlayer",
-  "TVVision", "TiviPlayerIPTV", "IPTV4K" ]```
-</ResponseExample>
