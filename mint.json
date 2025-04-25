@@ -49,9 +49,7 @@
     },
     {
       "group": "Auth",
-      "pages": [
-        "api-reference/endpoint/auth/generate-token"
-      ]
+      "pages": ["api-reference/endpoint/auth/generate-token"]
     },
     {
       "group": "Clientes",
@@ -60,7 +58,8 @@
         "api-reference/endpoint/customers/edit-user",
         "api-reference/endpoint/customers/create-user",
         "api-reference/endpoint/customers/active-test",
-        "api-reference/endpoint/customers/delete-client"
+        "api-reference/endpoint/customers/delete-client",
+        "api-reference/endpoint/customers/active-app"
       ]
     },
     {
@@ -72,6 +71,5 @@
         "api-reference/endpoint/reseller/delete-reseller"
       ]
     }
-    
   ]
 }

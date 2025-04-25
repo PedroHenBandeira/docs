@@ -18,13 +18,15 @@ Esse endpoint converte um cliente de teste em um cliente ativo, definindo o per�
   placeholder="Bearer {token}"
   required
 >
-  O token de autenticação no formato Bearer é obrigatório para acessar este endpoint.
+  O token de autenticação no formato Bearer é obrigatório para acessar este
+  endpoint.
 </ParamField>
 
 ### Parâmetros da URL
 
 <ParamField path="id" type="string" placeholder="505" required>
-  ID do cliente a ser ativado. Esse parâmetro deve ser informado diretamente na URL.
+  ID do cliente a ser ativado. Esse parâmetro deve ser informado diretamente na
+  URL.
 </ParamField>
 
 ### Parâmetros do corpo da requisição (Payload)
@@ -38,13 +40,10 @@ Esse endpoint converte um cliente de teste em um cliente ativo, definindo o per�
 </ParamField>
 
 <ParamField body="credits" type="number" placeholder="1" required>
-  Quantidade de créditos para ativação, onde cada crédito corresponde a um período específico:
-  - **0.5 Crédito** → 15 dias  
-  - **1 Crédito** → 1 mês  
-  - **2 Créditos** → 2 meses  
-  - **3 Créditos** → 3 meses  
-  - **5 Créditos** → 180 dias  
-  - **10 Créditos** → 360 dias  
+  Quantidade de créditos para ativação, onde cada crédito corresponde a um
+  período específico: - **0.5 Crédito** → 15 dias - **1 Crédito** → 1 mês - **2
+  Créditos** → 2 meses - **3 Créditos** → 3 meses - **5 Créditos** → 180 dias -
+  **10 Créditos** → 360 dias
 </ParamField>
 
 <ParamField body="whatsapp" type="string" placeholder="(12) 3 1231-2312">
