@@ -1,60 +1,139 @@
 ---
-title: "Ativar app"
-sidebarTitle: "Ativar app"
-api: "POST https://mcapi.knewcms.com:2087/lines/active/app"
+title: "Criar usuário"
+sidebarTitle: "Criar usuário"
+api: "POST https://mcapi.knewcms.com:2087/lines"
 authMethod: "authorization"
-description: "Este endpoint permite ativar aplicativos."
+description: "Este endpoint permite gerar um cliente na plataforma ."
 ---
 
 ## Como utilizar este endpoint?
 
-Esse endpoint ativa **vários aplicativos** na plataforma.
+Esse endpoint cria um **usuário ativado** para uso da plataforma.
 
 ### Headers obrigatórios
 
 <ParamField
-  header="Authorization"
-  type="string"
-  placeholder="Bearer {token}"
-  required
+    header="Authorization"
+    type="string"
+    placeholder="Bearer {token}"
+    required
 >
-  O token de autenticação no formato Bearer é obrigatório para acessar este
-  endpoint.
+    O token de autenticação no formato Bearer é obrigatório para acessar este
+    endpoint.
 </ParamField>
 
 ### Parâmetros do corpo da requisição (Payload)
 
 <ParamField body="notes" type="string" placeholder="Observações">
-  Observações adicionais sobre o cliente. Campo opcional.
+    Observações adicionais sobre o cliente. Campo opcional.
 </ParamField>
+
+
+
+### Exemplo de Requisição
+
+```json
+POST https://mcapi.knewcms.com:2087/lines/test
+Headers:
+{
+  "Authorization": "Bearer seu_token_aqui",
+  "Content-Type": "application/json"
+}
+Payload:
+{
+    "isTrial": 0,
+    "username": "xxxxxxxx",
+    "password": "xxxxxxxx",
+    "whatsapp": "xxxxx",
+    "telegram": "xxxx",
+    "country": "Brasil",
+    "notes": "xxxx",
+    "credits": 1,
+    "email": "xxxx"
+} 
+```
 
 ### Resposta
 
 <ResponseField name="status" type="number">
-  Indica o código HTTP da resposta. Esperado: 201 (activated).
+    Indica o código HTTP da resposta. Esperado: 201 (Created).
 </ResponseField>
 
 <ResponseField name="code" type="string">
-  O código de status da resposta.
+    O código de status da resposta.
 </ResponseField>
 
 <ResponseField name="response" type="object">
-  Conteúdo da resposta.
+    Conteúdo da resposta.
+
+    <Expandable title="Mostrar objeto">
+        <ResponseField name="id" type="number">
+            Identificador único do cliente teste gerado.
+        </ResponseField>
+
+        <ResponseField name="username" type="string">
+            Nome de usuário gerado para o cliente.
+        </ResponseField>
+
+        <ResponseField name="password" type="string">
+            Senha temporária gerada para o cliente.
+        </ResponseField>
+
+        <ResponseField name="owner" type="number">
+            ID do proprietário responsável pelo cliente.
+        </ResponseField>
+
+        <ResponseField name="expDate" type="string">
+            Data de expiração do acesso do cliente teste.
+        </ResponseField>
+
+        <ResponseField name="notes" type="string">
+            Observações adicionais sobre o cliente teste.
+        </ResponseField>
+
+        <ResponseField name="status" type="number">
+            Status da conta (ex.: 1 para ativo, 0 para inativo).
+        </ResponseField>
+
+        <ResponseField name="isTrial" type="number">
+            Indica se a conta é de teste (1 para sim, 0 para não).
+        </ResponseField>
+
+        <ResponseField name="country" type="string">
+            País de origem do cliente teste.
+        </ResponseField>
+
+        <ResponseField name="createdAt" type="string">
+            Data de criação do cliente teste.
+        </ResponseField>
+
+        <ResponseField name="updatedAt" type="string">
+            Data da última atualização do cliente teste.
+        </ResponseField>
+    </Expandable>
 </ResponseField>
 
-### Exemplo de Resposta - Sucesso
+### Exemplo de Resposta
 
 <ResponseExample>
-```json
-{
-  "success": true
-}
-````
-<ResponseExample/>
-### Exemplo de Resposta - Error
-
-<ResponseExample>
-```json
-{"message":"Dispositivo não encontrado","error":"Not Found","statusCode":404}
-````
-<ResponseExample/>
+    ```json
+    {
+        "id": 1201,
+        "username": "cliente_teste01",
+        "password": "senha1234",
+        "owner": 45,
+        "expDate": "2025-01-18T15:00:00.000Z",
+        "notes": "Conta de avaliação",
+        "status": 1,
+        "isTrial": 1,
+        "country": "Brazil",
+        "createdAt": "2025-01-16T13:00:00.000Z",
+        "updatedAt": "2025-01-16T13:00:00.000Z",
+        "whatsapp": null,
+        "telegram": null,
+        "migrationUrl": null,
+        "trash": 0,
+        "updated": 0
+    }
+    ```
+</ResponseExample>
