@@ -2,8 +2,8 @@
 title: "Ativar App"
 sidebarTitle: "Ativar App"
 api:
-  - "POST https://mcapi.knewcms.com:2087/lines/active/app/xstream"
-  - "POST https://mcapi.knewcms.com:2087/lines/active/app"
+  "POST https://mcapi.knewcms.com:2087/lines/active/app/xstream"
+  "POST https://mcapi.knewcms.com:2087/lines/active/app"
 authMethod: "authorization"
 description: "Estes endpoints permitem ativar um aplicativo de reprodução (XStream ou BrasilIPTV) para um usuário final."
 ---
@@ -58,7 +58,7 @@ Escolha o caminho de acordo com o tipo de app que deseja ativar.
 - **mac**: string — endereço MAC do dispositivo (com ou sem “:”)
 - **id_user**: number — ID do usuário final
 
-### Exemplo de requisição – XStream
+### Exemplo de Requisição — XStream
 
 ````http
 POST https://mcapi.knewcms.com:2087/lines/active/app/xstream
@@ -71,6 +71,7 @@ Content-Type: application/json
   "mac": "234235333",
   "id_user": 102330893
 }
+
 ### Resposta
 
 ```json
