@@ -16,29 +16,41 @@ Esse endpoint ativa **vários aplicativos** na plataforma.
     header="Authorization"
     type="string"
     placeholder="Bearer {token}"
-    required
->
-    O token de autenticação no formato Bearer é obrigatório para acessar este
-    endpoint.
-</ParamField>
+    required={true}
+/>
+
+O token de autenticação no formato Bearer é obrigatório para acessar este endpoint.
 
 ### Parâmetros do corpo da requisição (Payload)
 
-<ParamField body="notes" type="string" placeholder="Observações">
-    Observações adicionais sobre o cliente. Campo opcional.
-</ParamField>
+<ParamField
+    body="notes"
+    type="string"
+    placeholder="Observações"
+/>
+
+Observações adicionais sobre o cliente. Campo opcional.
 
 ### Resposta
 
-<ResponseField name="status" type="number">
+<ResponseField
+    name="status"
+    type="number"
+>
     Indica o código HTTP da resposta. Esperado: 201 (activated).
 </ResponseField>
 
-<ResponseField name="code" type="string">
+<ResponseField
+    name="code"
+    type="string"
+>
     O código de status da resposta.
 </ResponseField>
 
-<ResponseField name="response" type="object">
+<ResponseField
+    name="response"
+    type="object"
+>
     Conteúdo da resposta.
 </ResponseField>
 
