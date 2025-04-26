@@ -22,6 +22,27 @@ Esse endpoint ativa varios aplicativos dentro da plataforma .
   endpoint.
 </ParamField>
 
+### Parâmetros do corpo da requisição (Payload)
+
+<ParamField body="nameApp" type="string" placeholder="123456" required>
+    Nome do aplicativo a ser ativado. OPções disponíveis:
+    BrasilIPTV, EasyPlayer, IPTVPlus, IPTVNextPlayer, IPTVPlayerio, IPTVProPlayer, IPTVStarPlayer,
+    IPlayer, OttPlayer, TVVision, TiviPlayerIPTV, IPTV4K
+
+</ParamField>
+
+<ParamField body="mac" type="string" placeholder="12:12:21:12:21" required>
+    Mac do cliente
+</ParamField>
+
+<ParamField body="namePlaylist" type="string" placeholder="teste" required>
+    Nome da playlist a ser ativada.
+</ParamField>
+
+<ParamField body="id_user" type="number" placeholder="12333" required>
+    Id do cliente a ser ativado.
+</ParamField>
+
 ### Exemplo de Requisição
 
 ```json
@@ -39,25 +60,4 @@ Payload:
     "id_user": 102313925
 }
 ```
-
-### Parâmetros do corpo da requisição (Payload)
-
-<ParamField body="nameApp" type="string" placeholder="123456" required>
-    Nome do aplicativo a ser ativado. OPções disponíveis:
-    BrasilIPTV, EasyPlayer, IPTVPlus, IPTVNextPlayer, IPTVPlayerio, IPTVProPlayer, IPTVStarPlayer,
-    IPlayer, OttPlayer, TVVision, TiviPlayerIPTV, IPTV4K
-    
-</ParamField>
-
-<ParamField body="mac" type="string" placeholder="12:12:21:12:21" required>
-    Mac do cliente
-</ParamField>
-
-<ParamField body="namePlaylist" type="string" placeholder="teste" required>
-    Nome da playlist a ser ativada.
-</ParamField>
-
-<ParamField body="id_user" type="number" placeholder="12333" required>
-    Id do cliente a ser ativado.
-</ParamField>
 
