@@ -59,7 +59,9 @@
         "api-reference/endpoint/customers/create-user",
         "api-reference/endpoint/customers/active-test",
         "api-reference/endpoint/customers/delete-client",
-        "api-reference/endpoint/customers/active-app"
+        "api-reference/endpoint/customers/active-app",
+        "api-reference/endpoint/customers/active-new-app",
+        "api-reference/endpoint/customers/generate-test-nexus"
       ]
     },
     {
