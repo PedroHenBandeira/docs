@@ -61,7 +61,8 @@
         "api-reference/endpoint/customers/delete-client",
         "api-reference/endpoint/customers/active-app",
         "api-reference/endpoint/customers/active-new-app",
-        "api-reference/endpoint/customers/generate-test-nexus"
+        "api-reference/endpoint/customers/generate-test-nexus",
+        "api-reference/endpoint/customers/generate-test-krator"
       ]
     },
     {
